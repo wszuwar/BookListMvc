@@ -31,17 +31,15 @@ namespace BookListMvc
            
          
         }
-        public void Configure(IApplicationBuilder app, IServiceProvider serviceProvider)
-        { 
-            // Get the database context and apply the migrations
-            var context = serviceProvider.GetService<ApplicationDbContext>();
-            context.Database.Migrate();
-        }
+      
       
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationDbContext dataContext)
         {
+            
+            dataContext.Database.Migrate();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
